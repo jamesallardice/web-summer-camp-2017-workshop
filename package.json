@@ -1,0 +1,12 @@
+{
+  "name": "workshop",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node src/"
+  },
+  "dependencies": {
+    "config": "^1.26.1",
+    "express": "^4.15.3"
+  }
+}
