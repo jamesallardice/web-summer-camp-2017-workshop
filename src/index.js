@@ -48,6 +48,9 @@ app.post('/', (req, res) => {
 
     return res.format({
       html: () => void res.redirect('/dashboard'),
+      json: () => void res.status(200).json({
+        success: true,
+      }),
     });
   }
 
@@ -57,6 +60,7 @@ app.post('/', (req, res) => {
 
   return res.format({
     html: () => void res.status(401).render('login', data),
+    json: () => void res.status(401).json(data),
   });
 });
 
