@@ -5,6 +5,11 @@ const loginForm = document.getElementById('login-form');
 // make our own request to the server rather than relying on the normal browser
 // behaviour.
 if (loginForm) {
+  // Utility function to redirect the user onwards.
+  function redirect() {
+    window.location = '/dashboard';
+  }
+
   function login(form) {
     const formData = new FormData(form);
 
@@ -23,9 +28,23 @@ if (loginForm) {
     .then((res) => res.json())
     .then((res) => {
       // If the user is now signed in we can redirect to a protected route. If
-      // something went wrong we show an error message.
+      // something went wrong we show an error message. If the browser offers
+      // support for the Credential Management API we can ask the browser to
+      // suggest that it remembers the credentials used to successfully sign in
+      // at this point.
       if (res.success) {
-        window.location = '/dashboard';
+        if (navigator.credentials) {
+          // Create a PasswordCredential instance from the form and ask the
+          // browser to prompt the user to save it.
+          const credential = new PasswordCredential(form);
+
+          return navigator.credentials.store(credential)
+          .then(redirect);
+        }
+
+        // No support for the Credential Management API so we can just continue
+        // the journey.
+        redirect();
       } else {
         const message = document.getElementById('message');
 
