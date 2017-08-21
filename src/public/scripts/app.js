@@ -1,5 +1,6 @@
 // This file contains client-side JavaScript to enhance our login form.
 const loginForm = document.getElementById('login-form');
+const logoutLink = document.getElementById('logout');
 
 // Bind a "submit" event handler to the login form node. We can use this to
 // make our own request to the server rather than relying on the normal browser
@@ -87,4 +88,13 @@ if (loginForm) {
       }
     });
   }
+}
+
+// Bind a click event handler to the logout link node. We can use this to notify
+// the browser that the user is logging out to prevent them being automatically
+// signed back in by the Credential Management API functionality above.
+if (logoutLink) {
+  logoutLink.addEventListener('click', () => {
+    navigator.credentials.preventSilentAccess();
+  });
 }
