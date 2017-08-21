@@ -25,7 +25,8 @@ app.use(multer().none());
 
 // Set up route handlers. We define a GET handler to render the login page and
 // a POST handler to perform the login, as well as a protected GET handler for
-// the dashboard page which should only be accessible to logged-in users.
+// the dashboard page which should only be accessible to logged-in users. We
+// also define a GET handler to process logout requests.
 app.get('/', (req, res) => {
   res.status(200).render('login');
 });
@@ -66,6 +67,12 @@ app.post('/', (req, res) => {
 
 app.get('/dashboard', isAuthenticated, (req, res) => {
   return res.status(200).render('dashboard');
+});
+
+app.get('/logout', (req, res) => {
+  res.clearCookie('accessToken');
+
+  return res.redirect('/');
 });
 
 // Start the server.
