@@ -7,5 +7,9 @@ html
   body
     .container
       h1 Dashboard
-      .alert.alert-success You have successfully logged in!
+      .alert.alert-success
+        | You have successfully logged in!
+        |
+        a#logout(href='/logout') Log out
+        | .
     script(src='/scripts/app.js')
