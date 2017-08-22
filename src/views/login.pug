@@ -11,9 +11,9 @@ html
       form#login-form(method='post' action='/' enctype='multipart/form-data')
         .form-group
           label(for='username') Email address
-          input.form-control(type='text' name='username' id='username')
+          input.form-control(type='text' name='username' id='username' autocomplete='username')
         .form-group
           label(for='password') Password
-          input.form-control(type='password' name='password' id='password')
+          input.form-control(type='password' name='password' id='password' autocomplete='current-password')
         input.btn.btn-default(type='submit' value='Login')
     script(src='/scripts/app.js')
